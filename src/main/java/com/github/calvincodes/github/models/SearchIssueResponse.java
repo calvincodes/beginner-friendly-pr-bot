@@ -1,6 +1,5 @@
-package com.github.calvincodes.models;
+package com.github.calvincodes.github.models;
 
-import com.github.calvincodes.models.SearchIssue;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.github.calvincodes.models;
+package com.github.calvincodes.github.models;
 
 import com.google.gson.annotations.SerializedName;
 
