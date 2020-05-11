@@ -29,6 +29,6 @@ public class TwitterClient {
 
     public void tweetStatus(String statusStr) throws TwitterException {
         Status status = TWITTER_CLIENT.updateStatus(statusStr);
-        System.out.println("Successfully updated the status to [" + status.getText() + "].");
+//        System.out.println("Successfully updated the status to [" + status.getText() + "].");
     }
 }
