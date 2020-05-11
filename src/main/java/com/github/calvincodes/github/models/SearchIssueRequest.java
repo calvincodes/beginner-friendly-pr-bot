@@ -1,4 +1,4 @@
-package com.github.calvincodes.models;
+package com.github.calvincodes.github.models;
 
 public class SearchIssueRequest {
 

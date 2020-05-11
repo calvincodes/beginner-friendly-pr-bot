@@ -1,8 +1,10 @@
 package com.github.calvincodes;
 
-import com.github.calvincodes.client.GitHubIssuesClient;
-import com.github.calvincodes.models.SearchIssueRequest;
-import com.github.calvincodes.models.SearchIssueResponse;
+import com.github.calvincodes.github.client.GitHubIssuesClient;
+import com.github.calvincodes.github.models.SearchIssueRequest;
+import com.github.calvincodes.github.models.SearchIssueResponse;
+import com.github.calvincodes.twitter.client.TwitterClient;
+import twitter4j.TwitterException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -16,5 +18,13 @@ public class SampleRun {
         searchIssueRequest.setLabel("good-first-issue");
         SearchIssueResponse response = client.search(searchIssueRequest);
         System.out.println(response);
+
+        TwitterClient twitterClient = new TwitterClient();
+        try {
+            String status = "Retry Wrong Windows artifact names https://github.com/goreleaser/goreleaser/issues/1500";
+            twitterClient.tweetStatus(status);
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
     }
 }

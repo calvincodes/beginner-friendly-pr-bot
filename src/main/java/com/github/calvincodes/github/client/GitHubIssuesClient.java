@@ -1,7 +1,7 @@
-package com.github.calvincodes.client;
+package com.github.calvincodes.github.client;
 
-import com.github.calvincodes.models.SearchIssueRequest;
-import com.github.calvincodes.models.SearchIssueResponse;
+import com.github.calvincodes.github.models.SearchIssueRequest;
+import com.github.calvincodes.github.models.SearchIssueResponse;
 import com.google.gson.Gson;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
