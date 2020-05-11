@@ -17,14 +17,14 @@ public class SampleRun {
         searchIssueRequest.setState("open"); // TODO: Create enum for type. Label: Good first issue.
         searchIssueRequest.setLabel("good-first-issue");
         SearchIssueResponse response = client.search(searchIssueRequest);
-        System.out.println(response);
+//        System.out.println(response);
 
         TwitterClient twitterClient = new TwitterClient();
         try {
             String status = "Retry Wrong Windows artifact names https://github.com/goreleaser/goreleaser/issues/1500";
             twitterClient.tweetStatus(status);
         } catch (TwitterException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
     }
 }
