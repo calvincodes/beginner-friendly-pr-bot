@@ -24,7 +24,7 @@ public class SampleRun {
             String status = "Retry Wrong Windows artifact names https://github.com/goreleaser/goreleaser/issues/1500";
             twitterClient.tweetStatus(status);
         } catch (TwitterException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
     }
 }
