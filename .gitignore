@@ -1,10 +1,8 @@
-### Cloud env setup
-set-env.sh
-twitter4j.properties
+### Experimental Cloud env setup
 aws-ec2-setup.txt
 
-### Crontab
-crontab
+### GCP crontab setup
+gcp-crontab
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
