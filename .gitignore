@@ -1,5 +1,10 @@
+### Cloud env setup
+set-env.sh
 twitter4j.properties
-setup.txt
+aws-ec2-setup.txt
+
+### Crontab
+crontab
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
