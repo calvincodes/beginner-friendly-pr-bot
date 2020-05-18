@@ -13,5 +13,8 @@ sudo apt-get install default-jdk
 # Install Maven
 sudo apt install maven
 
+# Install Redis
+sudo apt-get install redis-server
+
 # Create fat jar
 # mvn assembly:assembly -DdescriptorId=jar-with-dependencies
