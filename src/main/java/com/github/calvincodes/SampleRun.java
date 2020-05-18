@@ -31,12 +31,13 @@ public class SampleRun {
         System.out.println("Connected to Redis");
 
         TwitterClient twitterClient = new TwitterClient();
+        final String HASH_TAGS = "#GitHub #OpenSource #GoodFirstIssue";
         response.getItems().forEach(searchIssue -> {
             String key = "twitter:id:" + searchIssue.getId();
             SetArgs setArgs = SetArgs.Builder.nx().ex(2592000L); // 30 days TTL
             if ("OK".equals(redisConnection.set(key, "1", setArgs))) {
                 try {
-                    String status = searchIssue.getTitle() + " " + searchIssue.getHtmlUrl();
+                    String status = searchIssue.getTitle() + " " + searchIssue.getHtmlUrl() + " " + HASH_TAGS;
                     twitterClient.tweetStatus(status);
                 } catch (TwitterException ex) {
                     System.err.println("Error while tweeting");
