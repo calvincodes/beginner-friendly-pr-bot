@@ -12,3 +12,6 @@ sudo apt-get install default-jdk
 
 # Install Maven
 sudo apt install maven
+
+# Create fat jar
+# mvn assembly:assembly -DdescriptorId=jar-with-dependencies
