@@ -6,7 +6,6 @@ import com.github.calvincodes.github.models.SearchIssueResponse;
 import com.github.calvincodes.twitter.client.TwitterClient;
 import com.lambdaworks.redis.RedisClient;
 import com.lambdaworks.redis.RedisConnection;
-import com.lambdaworks.redis.RedisURI;
 import com.lambdaworks.redis.protocol.SetArgs;
 import twitter4j.TwitterException;
 
@@ -21,7 +20,7 @@ public class SampleRun {
         searchIssueRequest.setState("open"); // TODO: Create enum for type. Label: Good first issue.
         searchIssueRequest.setLabel("good-first-issue");
         SearchIssueResponse response = client.search(searchIssueRequest);
-//        System.out.println(response);
+        System.out.println("GitHub response total item count: " + response.getTotalCount());
 
         // TODO: Create separate config file
         String redisHost = System.getenv("FOSC_REDIS_HOST");
@@ -32,22 +31,18 @@ public class SampleRun {
         System.out.println("Connected to Redis");
 
         TwitterClient twitterClient = new TwitterClient();
-
-        final int[] i = {0}; // TODO: Remove this
         response.getItems().forEach(searchIssue -> {
-            if (i[0] <= 3) { // TODO: Remove this
-                String key = "id:" + searchIssue.getId();
-                SetArgs setArgs = SetArgs.Builder.nx().ex(60);
-                if ("OK".equals(redisConnection.set(key, "1", setArgs))) {
-                    try {
-                        String status = searchIssue.getTitle() + " " + searchIssue.getHtmlUrl();
-                        twitterClient.tweetStatus(status);
-                    } catch (TwitterException e) {
-                        e.printStackTrace();
-                    }
+            String key = "twitter:id:" + searchIssue.getId();
+            SetArgs setArgs = SetArgs.Builder.nx().ex(2592000L); // 30 days TTL
+            if ("OK".equals(redisConnection.set(key, "1", setArgs))) {
+                try {
+                    String status = searchIssue.getTitle() + " " + searchIssue.getHtmlUrl();
+                    twitterClient.tweetStatus(status);
+                } catch (TwitterException ex) {
+                    System.err.println("Error while tweeting");
+                    ex.printStackTrace();
                 }
             }
-            i[0] = i[0] + 1; // TODO: Remove this
         });
 
         redisConnection.close();

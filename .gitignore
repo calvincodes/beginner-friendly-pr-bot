@@ -4,6 +4,9 @@ aws-ec2-setup.txt
 ### GCP crontab setup
 gcp-crontab
 
+### GCP redis setup
+redis-setup.txt
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
 target/
