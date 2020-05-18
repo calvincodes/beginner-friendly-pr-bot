@@ -11,15 +11,16 @@ public class TwitterClient {
     private Twitter TWITTER_CLIENT = null;
     private volatile Boolean IS_CLIENT_INITIALIZED = false;
 
+    // TODO: Create separate config file
     public TwitterClient() {
         synchronized (IS_CLIENT_INITIALIZED) {
             if (!IS_CLIENT_INITIALIZED) {
                 ConfigurationBuilder configBuilder = new ConfigurationBuilder();
                 configBuilder.setDebugEnabled(true)
-                        .setOAuthConsumerKey(System.getenv("TWITTER4J_OAUTH_CONSUMER_KEY"))
-                        .setOAuthConsumerSecret(System.getenv("TWITTER4J_OAUTH_CONSUMER_SECRET"))
-                        .setOAuthAccessToken(System.getenv("TWITTER4J_OAUTH_ACCESS_TOKEN"))
-                        .setOAuthAccessTokenSecret(System.getenv("TWITTER4J_OAUTH_ACCESS_TOKEN_SECRET"));
+                        .setOAuthConsumerKey(System.getenv("FOSC_TWITTER4J_OAUTH_CONSUMER_KEY"))
+                        .setOAuthConsumerSecret(System.getenv("FOSC_TWITTER4J_OAUTH_CONSUMER_SECRET"))
+                        .setOAuthAccessToken(System.getenv("FOSC_TWITTER4J_OAUTH_ACCESS_TOKEN"))
+                        .setOAuthAccessTokenSecret(System.getenv("FOSC_TWITTER4J_OAUTH_ACCESS_TOKEN_SECRET"));
                 TwitterFactory twitterFactory = new TwitterFactory(configBuilder.build());
                 TWITTER_CLIENT = twitterFactory.getInstance();
                 IS_CLIENT_INITIALIZED = true;
