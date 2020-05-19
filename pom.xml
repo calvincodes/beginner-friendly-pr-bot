@@ -62,7 +62,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.github.calvincodes.SampleRun</mainClass>
+                            <mainClass>com.github.calvincodes.Driver</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
