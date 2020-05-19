@@ -1,5 +1,6 @@
 package com.github.calvincodes;
 
+import com.github.calvincodes.github.GitHubIssuesCollector;
 import com.github.calvincodes.github.client.GitHubIssuesClient;
 import com.github.calvincodes.github.models.SearchIssueRequest;
 import com.github.calvincodes.github.models.SearchIssueResponse;
@@ -11,16 +12,17 @@ import twitter4j.TwitterException;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class SampleRun {
+public class Driver {
     public static void main(String[] args) throws IOException, URISyntaxException {
 
-        GitHubIssuesClient client = new GitHubIssuesClient();
-        SearchIssueRequest searchIssueRequest = new SearchIssueRequest();
-        searchIssueRequest.setState("open"); // TODO: Create enum for type. Label: Good first issue.
-        searchIssueRequest.setLabel("good-first-issue");
-        SearchIssueResponse response = client.search(searchIssueRequest);
-        System.out.println("GitHub response total item count: " + response.getTotalCount());
+        List<String> labels = new ArrayList<>(Arrays.asList("newbie", "first-timers-only", "good-first-issue"));
+
+        GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
+        List<SearchIssueResponse> searchIssueResponseList = gitHubIssuesCollector.searchIssues(labels);
 
         // TODO: Create separate config file
         String redisHost = System.getenv("FOSC_REDIS_HOST");
@@ -31,8 +33,8 @@ public class SampleRun {
         System.out.println("Connected to Redis");
 
         TwitterClient twitterClient = new TwitterClient();
-        final String HASH_TAGS = "#GitHub #OpenSource #GoodFirstIssue";
-        response.getItems().forEach(searchIssue -> {
+        final String HASH_TAGS = "#GitHub #OpenSource #Newbie #FirstTimersOnly #GoodFirstIssue";
+        searchIssueResponseList.forEach(searchIssueResponse -> searchIssueResponse.getItems().forEach(searchIssue -> {
             String key = "twitter:id:" + searchIssue.getId();
             SetArgs setArgs = SetArgs.Builder.nx().ex(2592000L); // 30 days TTL
             if ("OK".equals(redisConnection.set(key, "1", setArgs))) {
@@ -44,9 +46,12 @@ public class SampleRun {
                     ex.printStackTrace();
                 }
             }
-        });
+        }));
 
         redisConnection.close();
         redisClient.shutdown();
+        System.out.println("Closed Redis connection");
+
+        System.out.println("Driver run completed");
     }
 }
