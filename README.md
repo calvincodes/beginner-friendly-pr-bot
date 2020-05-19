@@ -1,1 +1,1 @@
-# good-first-issues-curator
+# first-open-source-commit-bot
