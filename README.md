@@ -1,8 +1,8 @@
 # First Open Source Commit Bot
 
 ## Who am I?
+<img src="bot-animate.gif" alt="Bot Says Hi" width="200" height="150"/>
 This is me, and here's [my twitter handle](https://twitter.com/1st_opensrc_cmt).
-![Bot Says Hi](bot-animate.gif =100x100)
 
 ## What do I do?
 I tweet beginner-friendly GitHub issues to help developers begin their open source contribution
