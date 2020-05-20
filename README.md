@@ -5,18 +5,18 @@
 This is me, and here's [my twitter handle](https://twitter.com/1st_opensrc_cmt).
 
 ## What do I do?
-I tweet beginner-friendly GitHub issues to help developers begin their open source contribution
+I tweet beginner-friendly GitHub issues to help developers start their open source contribution
 journey.
 
 ## Who are you (the reader)?
-* Someone who has is new to coding. :relaxed:
+* Someone who is new to coding. :relaxed:
 * Someone who has been coding for a while, but has never contributed to open source projects. :relieved:
-* Neither of these and now wondering how I ended up here? :flushed:
+* Neither of these and now wondering why are you here? :flushed:
 
 ## How can I help you?
 * Follow me on [Twitter](https://twitter.com/1st_opensrc_cmt).
 * Keep an eye out for various issues which I tweet.
-* Grab an issue which you like or find easy for yourself.
+* Grab any issue which you like or find easy.
 * Make your first open source contribution.
 * And that's it! You did it. :bowtie:
 
