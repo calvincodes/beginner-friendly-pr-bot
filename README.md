@@ -1,7 +1,7 @@
 # First Open Source Commit Bot
+<img src="bot-animate.gif" alt="Bot Says Hi" width="200" height="150"/>
 
 ## Who am I?
-<img src="bot-animate.gif" alt="Bot Says Hi" width="200" height="150"/>
 This is me, and here's [my twitter handle](https://twitter.com/1st_opensrc_cmt).
 
 ## What do I do?
