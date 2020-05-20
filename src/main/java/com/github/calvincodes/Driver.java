@@ -39,7 +39,12 @@ public class Driver {
             SetArgs setArgs = SetArgs.Builder.nx().ex(2592000L); // 30 days TTL
             if ("OK".equals(redisConnection.set(key, "1", setArgs))) {
                 try {
-                    String status = searchIssue.getTitle() + " " + searchIssue.getHtmlUrl() + " " + HASH_TAGS;
+                    String statusPrefix = searchIssue.getTitle();
+                    String statusSuffix = " " + searchIssue.getHtmlUrl() + " " + HASH_TAGS;
+                    if (statusPrefix.length() + statusSuffix.length() >= 280) {
+                        statusPrefix = statusPrefix.substring(0, 280 - statusSuffix.length() - 1);
+                    }
+                    String status = statusPrefix + statusSuffix;
                     twitterClient.tweetStatus(status);
                 } catch (TwitterException ex) {
                     System.err.println("Error while tweeting");
