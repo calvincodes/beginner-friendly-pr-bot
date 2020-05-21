@@ -1,11 +1,10 @@
 package com.github.calvincodes;
 
+import com.github.calvincodes.database.DatabaseActions;
+import com.github.calvincodes.database.DatabaseFactory;
 import com.github.calvincodes.github.GitHubIssuesCollector;
 import com.github.calvincodes.github.models.SearchIssueResponse;
 import com.github.calvincodes.twitter.client.TwitterClient;
-import com.lambdaworks.redis.RedisClient;
-import com.lambdaworks.redis.RedisConnection;
-import com.lambdaworks.redis.protocol.SetArgs;
 import twitter4j.TwitterException;
 
 import java.util.List;
@@ -20,20 +19,14 @@ public class Driver {
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
         List<SearchIssueResponse> searchIssueResponseList = gitHubIssuesCollector.searchIssues(labels);
 
-        // TODO: Create separate config file
-        String redisHost = System.getenv("FOSC_REDIS_HOST");
-        int redisPort = Integer.parseInt(System.getenv("FOSC_REDIS_PORT"));
-        RedisClient redisClient = new RedisClient(redisHost, redisPort);
-        RedisConnection<String, String> redisConnection = redisClient.connect();
-
-        System.out.println("Connected to Redis");
+        DatabaseActions databaseActions = DatabaseFactory.getDatabaseActions();
+        databaseActions.connect();
 
         TwitterClient twitterClient = new TwitterClient();
         final String HASH_TAGS = "#GitHub #OpenSource #Newbie #FirstTimersOnly #GoodFirstIssue";
         searchIssueResponseList.forEach(searchIssueResponse -> searchIssueResponse.getItems().forEach(searchIssue -> {
             String key = "twitter:id:" + searchIssue.getId();
-            SetArgs setArgs = SetArgs.Builder.nx().ex(2592000L); // 30 days TTL
-            if ("OK".equals(redisConnection.set(key, "1", setArgs))) {
+            if (databaseActions.setKey(key, "1", 2592000L)) {
                 try {
                     String statusPrefix = searchIssue.getTitle();
                     String statusSuffix = " " + searchIssue.getHtmlUrl() + " " + HASH_TAGS;
@@ -49,9 +42,7 @@ public class Driver {
             }
         }));
 
-        redisConnection.close();
-        redisClient.shutdown();
-        System.out.println("Closed Redis connection");
+        databaseActions.disconnect();
 
         System.out.println("Driver run completed");
     }
