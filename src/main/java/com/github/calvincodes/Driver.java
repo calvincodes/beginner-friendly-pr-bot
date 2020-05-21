@@ -17,7 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Driver {
-    public static void main(String[] args) throws IOException, URISyntaxException {
+    public static void main(String[] args) {
 
         List<String> labels = new ArrayList<>(Arrays.asList("newbie", "first-timers-only", "good-first-issue"));
 
