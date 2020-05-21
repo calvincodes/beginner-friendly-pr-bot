@@ -1,8 +1,6 @@
 package com.github.calvincodes;
 
 import com.github.calvincodes.github.GitHubIssuesCollector;
-import com.github.calvincodes.github.client.GitHubIssuesClient;
-import com.github.calvincodes.github.models.SearchIssueRequest;
 import com.github.calvincodes.github.models.SearchIssueResponse;
 import com.github.calvincodes.twitter.client.TwitterClient;
 import com.lambdaworks.redis.RedisClient;
@@ -10,16 +8,14 @@ import com.lambdaworks.redis.RedisConnection;
 import com.lambdaworks.redis.protocol.SetArgs;
 import twitter4j.TwitterException;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static com.github.calvincodes.SearchableLabels.SEARCHABLE_LABELS;
 
 public class Driver {
     public static void main(String[] args) {
 
-        List<String> labels = new ArrayList<>(Arrays.asList("newbie", "first-timers-only", "good-first-issue"));
+        List<String> labels = SEARCHABLE_LABELS;
 
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
         List<SearchIssueResponse> searchIssueResponseList = gitHubIssuesCollector.searchIssues(labels);
