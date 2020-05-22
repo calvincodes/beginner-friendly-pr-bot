@@ -2,12 +2,12 @@ package com.github.calvincodes.database;
 
 public class DatabaseFactory {
 
-    public static DatabaseActions getDatabaseActions() {
+    public static DatabaseHandler getDatabaseActions() {
         String databaseType = System.getenv("FOSC_DATABASE_TYPE");
         if ("REDIS".equalsIgnoreCase(databaseType)) {
-            return new RedisDatabaseActions();
+            return new RedisDatabaseHandler();
         } else {
-            return new InMemoryDatabaseActions();
+            return new InMemoryDatabaseHandler();
         }
     }
 }
