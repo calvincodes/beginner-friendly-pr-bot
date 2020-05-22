@@ -4,7 +4,7 @@ import com.lambdaworks.redis.RedisClient;
 import com.lambdaworks.redis.RedisConnection;
 import com.lambdaworks.redis.protocol.SetArgs;
 
-public class RedisDatabaseActions implements DatabaseActions {
+public class RedisDatabaseHandler implements DatabaseHandler {
 
     private RedisClient redisClient = null;
     private RedisConnection<String, String> redisConnection = null;
@@ -27,7 +27,7 @@ public class RedisDatabaseActions implements DatabaseActions {
     }
 
     @Override
-    public boolean setKey(String key, String value, Long ttlInSeconds) {
+    public boolean setKeyIfNotExist(String key, String value, Long ttlInSeconds) {
         if (IS_CONNECTION_ESTABLISHED) {
             SetArgs setArgs = SetArgs.Builder.nx().ex(ttlInSeconds);
             return "OK".equals(redisConnection.set(key, value, setArgs));

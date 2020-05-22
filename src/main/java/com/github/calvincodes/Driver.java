@@ -1,6 +1,6 @@
 package com.github.calvincodes;
 
-import com.github.calvincodes.database.DatabaseActions;
+import com.github.calvincodes.database.DatabaseHandler;
 import com.github.calvincodes.database.DatabaseFactory;
 import com.github.calvincodes.github.GitHubIssuesCollector;
 import com.github.calvincodes.github.models.SearchIssueResponse;
@@ -19,14 +19,14 @@ public class Driver {
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
         List<SearchIssueResponse> searchIssueResponseList = gitHubIssuesCollector.searchIssues(labels);
 
-        DatabaseActions databaseActions = DatabaseFactory.getDatabaseActions();
-        databaseActions.connect();
+        DatabaseHandler databaseHandler = DatabaseFactory.getDatabaseActions();
+        databaseHandler.connect();
 
         TwitterClient twitterClient = new TwitterClient();
         final String HASH_TAGS = "#GitHub #OpenSource #Newbie #FirstTimersOnly #GoodFirstIssue";
         searchIssueResponseList.forEach(searchIssueResponse -> searchIssueResponse.getItems().forEach(searchIssue -> {
             String key = "twitter:id:" + searchIssue.getId();
-            if (databaseActions.setKey(key, "1", 2592000L)) {
+            if (databaseHandler.setKeyIfNotExist(key, "1", 2592000L)) {
                 try {
                     String statusPrefix = searchIssue.getTitle();
                     String statusSuffix = " " + searchIssue.getHtmlUrl() + " " + HASH_TAGS;
@@ -42,7 +42,7 @@ public class Driver {
             }
         }));
 
-        databaseActions.disconnect();
+        databaseHandler.disconnect();
 
         System.out.println("Driver run completed");
     }
