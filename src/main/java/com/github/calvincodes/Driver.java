@@ -4,8 +4,8 @@ import com.github.calvincodes.database.DatabaseHandler;
 import com.github.calvincodes.database.DatabaseFactory;
 import com.github.calvincodes.github.GitHubIssuesCollector;
 import com.github.calvincodes.github.models.SearchIssueResponse;
-import com.github.calvincodes.twitter.client.TwitterClient;
-import twitter4j.TwitterException;
+import com.github.calvincodes.twitter.TwitterClient;
+import com.github.calvincodes.twitter.TwitterClientFactory;
 
 import java.util.List;
 
@@ -16,32 +16,31 @@ public class Driver {
 
         List<String> labels = SEARCHABLE_LABELS;
 
+        // Collect issues from GitHub
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
         List<SearchIssueResponse> searchIssueResponseList = gitHubIssuesCollector.searchIssues(labels);
 
+        // Setup DB connection
         DatabaseHandler databaseHandler = DatabaseFactory.getDatabaseActions();
         databaseHandler.connect();
 
-        TwitterClient twitterClient = new TwitterClient();
+        // Tweet issues if not present in the DB
+        TwitterClient twitterClient = TwitterClientFactory.getTwitterClient();
         final String HASH_TAGS = "#GitHub #OpenSource #Newbie #FirstTimersOnly #GoodFirstIssue";
         searchIssueResponseList.forEach(searchIssueResponse -> searchIssueResponse.getItems().forEach(searchIssue -> {
             String key = "twitter:id:" + searchIssue.getId();
             if (databaseHandler.setKeyIfNotExist(key, "1", 2592000L)) {
-                try {
-                    String statusPrefix = searchIssue.getTitle();
-                    String statusSuffix = " " + searchIssue.getHtmlUrl() + " " + HASH_TAGS;
-                    if (statusPrefix.length() + statusSuffix.length() >= 280) {
-                        statusPrefix = statusPrefix.substring(0, 280 - statusSuffix.length() - 1);
-                    }
-                    String status = statusPrefix + statusSuffix;
-                    twitterClient.tweetStatus(status);
-                } catch (TwitterException ex) {
-                    System.err.println("Error while tweeting");
-                    ex.printStackTrace();
+                String statusPrefix = searchIssue.getTitle();
+                String statusSuffix = " " + searchIssue.getHtmlUrl() + " " + HASH_TAGS;
+                if (statusPrefix.length() + statusSuffix.length() >= 280) {
+                    statusPrefix = statusPrefix.substring(0, 280 - statusSuffix.length() - 1);
                 }
+                String status = statusPrefix + statusSuffix;
+                twitterClient.tweetStatus(status);
             }
         }));
 
+        // Reset DB connection
         databaseHandler.disconnect();
 
         System.out.println("Driver run completed");
