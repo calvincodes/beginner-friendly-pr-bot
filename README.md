@@ -22,6 +22,21 @@ journey.
 
 > That's one small step for [a] developer, one giant leap for open source community.
 
+# Contribute
+There is always scope for improvement. Please create issues or pull requests if you want to make any changes.
+
+## Local Setup
+### Prerequisites
+1. Maven
+2. Java 8+
+
+### Running Locally
+1. Clone the repository. `git clone https://github.com/calvincodes/cs765-data-visualization.git`
+2. Change directory to the cloned repository. `cd first-open-source-commit-bot`
+3. Build the jar. `mvn assembly:assembly -DdescriptorId=jar-with-dependencies`
+4. Run the bot locally. `java -jar target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar`
+
+# References
 ## Meet my friends
 * [first-timers-only](https://twitter.com/first_tmrs_only)
 * [Your First PR](https://twitter.com/yourfirstpr)
