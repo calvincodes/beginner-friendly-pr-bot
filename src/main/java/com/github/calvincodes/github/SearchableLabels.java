@@ -11,6 +11,7 @@ public class SearchableLabels {
                     "newbie",
                     "first-timers-only",
                     "\"good first issue\"", // Official GitHub issue.g
-                    "good-first-issue"
+                    "good-first-issue",
+                    "beginner"
             ));
 }
