@@ -1,4 +1,4 @@
-package com.github.calvincodes;
+package com.github.calvincodes.github;
 
 import java.util.ArrayList;
 import java.util.Arrays;

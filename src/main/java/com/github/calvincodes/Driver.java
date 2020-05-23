@@ -9,7 +9,7 @@ import com.github.calvincodes.twitter.TwitterClientFactory;
 
 import java.util.List;
 
-import static com.github.calvincodes.SearchableLabels.SEARCHABLE_LABELS;
+import static com.github.calvincodes.github.SearchableLabels.SEARCHABLE_LABELS;
 
 public class Driver {
     public static void main(String[] args) {
