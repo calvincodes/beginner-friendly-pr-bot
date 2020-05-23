@@ -1,7 +1,5 @@
 package com.github.calvincodes.twitter.client;
 
-import com.github.calvincodes.twitter.TwitterClient;
-
 public class LocalTwitterClient implements TwitterClient {
 
     @Override

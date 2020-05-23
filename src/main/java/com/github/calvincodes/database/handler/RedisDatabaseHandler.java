@@ -1,4 +1,4 @@
-package com.github.calvincodes.database;
+package com.github.calvincodes.database.handler;
 
 import com.lambdaworks.redis.RedisClient;
 import com.lambdaworks.redis.RedisConnection;

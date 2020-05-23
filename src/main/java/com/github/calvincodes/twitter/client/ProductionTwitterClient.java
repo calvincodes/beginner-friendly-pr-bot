@@ -1,6 +1,5 @@
 package com.github.calvincodes.twitter.client;
 
-import com.github.calvincodes.twitter.TwitterClient;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;

@@ -1,4 +1,4 @@
-package com.github.calvincodes.database;
+package com.github.calvincodes.database.handler;
 
 import java.util.HashSet;
 import java.util.Set;

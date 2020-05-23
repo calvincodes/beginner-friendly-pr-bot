@@ -2,6 +2,7 @@ package com.github.calvincodes.twitter;
 
 import com.github.calvincodes.twitter.client.LocalTwitterClient;
 import com.github.calvincodes.twitter.client.ProductionTwitterClient;
+import com.github.calvincodes.twitter.client.TwitterClient;
 
 public class TwitterClientFactory {
 
