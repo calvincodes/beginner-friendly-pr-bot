@@ -10,6 +10,7 @@ public class SearchableLabels {
             Arrays.asList(
                     "newbie",
                     "first-timers-only",
+                    "\"good first issue\"", // Official GitHub issue.g
                     "good-first-issue"
             ));
 }
