@@ -8,10 +8,10 @@ public class SearchableLabels {
 
     public static List<String> SEARCHABLE_LABELS = new ArrayList<>(
             Arrays.asList(
-                    "newbie",
+                    "beginner",
                     "first-timers-only",
-                    "\"good first issue\"", // Official GitHub issue.
+                    "\"good first issue\"", //Official Github issue.
                     "good-first-issue",
-                    "beginner"
+                    "newbie"
             ));
 }
