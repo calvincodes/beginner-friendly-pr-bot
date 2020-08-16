@@ -17,10 +17,10 @@ sudo apt install maven
 sudo apt-get install redis-server
 
 # Clone GitHub Repo
-git clone https://github.com/calvincodes/first-open-source-commit-bot.git
+git clone https://github.com/calvincodes/beginner-friendly-pr-bot.git
 
 # Create fat jar
-# cd first-open-source-commit-bot
+# cd beginner-friendly-pr-bot
 # mvn assembly:assembly -DdescriptorId=jar-with-dependencies
 
 # Start redis
@@ -40,4 +40,4 @@ git clone https://github.com/calvincodes/first-open-source-commit-bot.git
 # FOSC_ENVIRONMENT
 
 # Add cron schedule
-# 0 */12 * * * java -jar ${absolute_path_to}/first-open-source-commit-bot/target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+# 0 */12 * * * java -jar ${absolute_path_to}/beginner-friendly-pr-bot/target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar
