@@ -8,6 +8,7 @@ import com.github.calvincodes.twitter.client.TwitterClient;
 import com.github.calvincodes.twitter.TwitterClientFactory;
 
 import java.util.List;
+import java.util.Random;
 
 import static com.github.calvincodes.github.SearchableLabels.SEARCHABLE_LABELS;
 
@@ -15,6 +16,7 @@ public class Driver {
     public static void main(String[] args) {
 
         List<String> labels = SEARCHABLE_LABELS;
+        Random random = new Random();
 
         // Collect issues from GitHub
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
@@ -37,6 +39,13 @@ public class Driver {
                 }
                 String status = statusPrefix + statusSuffix;
                 twitterClient.tweetStatus(status);
+                try {
+                    int sleepSecs = random.nextInt(5) + 5;
+                    Thread.sleep(sleepSecs * 1000);
+                } catch (InterruptedException e) {
+                    System.err.println("Error while sleeping between tweets.");
+                    e.printStackTrace();
+                }
             }
         }));
 
