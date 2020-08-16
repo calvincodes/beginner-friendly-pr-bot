@@ -1,4 +1,4 @@
-# First Open Source Commit Bot
+# Beginner Friendly PR Bot
 <img src="bot-animate.gif" alt="Bot Says Hi" width="200" height="150"/>
 
 ## Who am I?
@@ -31,7 +31,7 @@ There is always scope for improvement. Please create issues or pull requests if 
 2. Java 8+
 
 ### Running Locally
-1. Clone the repository. `git clone https://github.com/calvincodes/first-open-source-commit-bot.git`
+1. Clone the repository. `git clone https://github.com/calvincodes/beginner-friendly-pr-bot.git`
 2. Change directory to the cloned repository. `cd first-open-source-commit-bot`
 3. Build the jar. `mvn assembly:assembly -DdescriptorId=jar-with-dependencies`
 4. Run the bot locally. `java -jar target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar`
