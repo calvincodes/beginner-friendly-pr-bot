@@ -2,7 +2,7 @@
 <img src="bot-animate.gif" alt="Bot Says Hi" width="200" height="150"/>
 
 ## Who am I?
-This is me, and here's [my twitter handle](https://twitter.com/1st_opensrc_cmt).
+This is me, and here's [my twitter handle](https://twitter.com/bgnr_frndly_pr).
 
 ## What do I do?
 I tweet beginner-friendly GitHub issues to help developers start their open source contribution
@@ -14,7 +14,7 @@ journey.
 * Neither of these and now wondering why are you here? :flushed:
 
 ## How can I help you?
-* Follow me on [Twitter](https://twitter.com/1st_opensrc_cmt).
+* Follow me on [Twitter](https://twitter.com/bgnr_frndly_pr).
 * Keep an eye out for various issues which I tweet.
 * Grab any issue which you like or find easy.
 * Make your first open source contribution.
@@ -31,7 +31,7 @@ There is always scope for improvement. Please create issues or pull requests if 
 2. Java 8+
 
 ### Running Locally
-1. Clone the repository. `git clone https://github.com/calvincodes/cs765-data-visualization.git`
+1. Clone the repository. `git clone https://github.com/calvincodes/first-open-source-commit-bot.git`
 2. Change directory to the cloned repository. `cd first-open-source-commit-bot`
 3. Build the jar. `mvn assembly:assembly -DdescriptorId=jar-with-dependencies`
 4. Run the bot locally. `java -jar target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar`
