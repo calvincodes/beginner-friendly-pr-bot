@@ -40,7 +40,7 @@ public class Driver {
                 String status = statusPrefix + statusSuffix;
                 twitterClient.tweetStatus(status);
                 try {
-                    int sleepSecs = random.nextInt(5) + 5;
+                    int sleepSecs = random.nextInt(15) + 45;
                     Thread.sleep(sleepSecs * 1000);
                 } catch (InterruptedException e) {
                     System.err.println("Error while sleeping between tweets.");
