@@ -70,18 +70,19 @@ public class Driver {
         emailSender.sendEmail("[Twitter-Bot] Test Email!");
 
         try {
-            String emailCommand = "/bin/sh -c " +
+            String emailCommand =
                     "echo 'Driver Test passed.' | " +
                     "mail -s '[Twitter-Bot] Test Email!' " +
                     "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
                     " " + System.getenv("FOSC_MAILJET_RECIPIENT");
 
 //            String emailCommand = "mail -s '[Twitter-Bot] Test Email!' -aFrom:" + System.getenv("FOSC_MAILJET_SENDER") + " " + System.getenv("FOSC_MAILJET_RECIPIENT") + " <<< 'This is the message'";
-
-//            String[] emailCommand = {"/bin/sh", "-c", String.format("echo 'This is also test.' | mail -s '[Twitter-Bot] Test Email!' -aFrom:%s %s", System.getenv("FOSC_MAILJET_SENDER"), System.getenv("FOSC_MAILJET_RECIPIENT"))};
-
             System.out.println("emailCommand = " + emailCommand);
-            Process p = Runtime.getRuntime().exec(emailCommand);
+
+//            String[] commandArray = {"/bin/sh", "-c", String.format("echo 'This is also test.' | mail -s '[Twitter-Bot] Test Email!' -aFrom:%s %s", System.getenv("FOSC_MAILJET_SENDER"), System.getenv("FOSC_MAILJET_RECIPIENT"))};
+            String[] commandArray = {"/bin/sh", "-c", emailCommand};
+            System.out.println("commandArray = " + commandArray);
+            Process p = Runtime.getRuntime().exec(commandArray);
             p.waitFor();
             System.out.println ("exit: " + p.exitValue());
             p.destroy();
