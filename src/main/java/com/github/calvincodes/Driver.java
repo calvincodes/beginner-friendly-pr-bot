@@ -18,6 +18,8 @@ import static com.github.calvincodes.github.SearchableLabels.SEARCHABLE_LABELS;
 public class Driver {
     public static void main(String[] args) {
 
+        System.out.println("[" + Instant.now() + "] Driver run started.");
+
         List<String> labels = SEARCHABLE_LABELS;
         Random random = new Random();
 
@@ -64,7 +66,7 @@ public class Driver {
             emailSender.sendEmail("[Twitter-Bot] Tweeted 0 issues!");
         }
 
-        System.out.println("[" + Instant.now() + "] Tweeted " + numberOfTweets + " issues.");
-        System.out.println("Driver run completed");
+        System.out.println("Tweeted " + numberOfTweets + " issues.");
+        System.out.println("[" + Instant.now() + "] Driver run completed.");
     }
 }
