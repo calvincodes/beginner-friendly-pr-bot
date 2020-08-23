@@ -71,7 +71,7 @@ public class Driver {
 
         try {
             String emailCommand =
-                    "echo 'Test passed.' | " +
+                    "echo 'Driver Test passed.' | " +
                     "mail -s '[Twitter-Bot] Test Email!' " +
                     "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
                     " " + System.getenv("FOSC_MAILJET_RECIPIENT");
