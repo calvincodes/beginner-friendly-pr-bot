@@ -51,5 +51,5 @@ git clone https://github.com/calvincodes/beginner-friendly-pr-bot.git
 #FOSC_MAILJET_SECRET_KEY
 
 # Add cron schedule
-# 0 */6 * * * java -jar ${absolute_path_to}/beginner-friendly-pr-bot/target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar >> log-file-path 2>&1
+# 0 */1 * * * java -jar ${absolute_path_to}/beginner-friendly-pr-bot/target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar >> log-file-path 2>&1
 
