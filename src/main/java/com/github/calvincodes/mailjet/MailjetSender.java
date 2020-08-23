@@ -41,16 +41,16 @@ public class MailjetSender {
                         .put(new JSONObject()
                                 .put(Emailv31.Message.FROM, new JSONObject()
                                         .put("Email", sender)
-                                        .put("Name", "pandora"))
+                                        .put("Name", "Arpit Jain"))
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
                                                 .put("Email", recipient)))
                                 .put(Emailv31.Message.SUBJECT, subject)
                                 .put(Emailv31.Message.TEXTPART,
-                                        "Hi! SOS! They found out about me.")
+                                        "Hi! They found out about me.")
                                 .put(Emailv31.Message.HTMLPART,
                                         "<h3>Hi!</h3>"
-                                                + "<br />SOS! They found out about me.")));
+                                                + "<br />They found out about me.")));
 
 
         try {
