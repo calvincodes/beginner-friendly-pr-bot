@@ -76,7 +76,10 @@ public class Driver {
 //                    "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
 //                    " " + System.getenv("FOSC_MAILJET_RECIPIENT");
 
-            String emailCommand = "mail -s '[Twitter-Bot] Test Email!' -aFrom:" + System.getenv("FOSC_MAILJET_SENDER") + " " + System.getenv("FOSC_MAILJET_RECIPIENT") + " <<< 'This is the message'";
+//            String emailCommand = "mail -s '[Twitter-Bot] Test Email!' -aFrom:" + System.getenv("FOSC_MAILJET_SENDER") + " " + System.getenv("FOSC_MAILJET_RECIPIENT") + " <<< 'This is the message'";
+
+            String[] emailCommand = {"/bin/sh", "-c", String.format("echo 'This is also test.' | mail -s '[Twitter-Bot] Test Email!' -aFrom:%s %s", System.getenv("FOSC_MAILJET_SENDER"), System.getenv("FOSC_MAILJET_RECIPIENT"))};
+
             System.out.println("emailCommand = " + emailCommand);
             Process p = Runtime.getRuntime().exec(emailCommand);
             p.waitFor();
