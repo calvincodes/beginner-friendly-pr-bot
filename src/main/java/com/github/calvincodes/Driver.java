@@ -75,6 +75,7 @@ public class Driver {
                             "mail -s '[Twitter-Bot] Test Email!' " +
                             "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
                             " " + System.getenv("FOSC_MAILJET_RECIPIENT"));
+            p.waitFor();
             System.out.println ("exit: " + p.exitValue());
             p.destroy();
             // TODO: Remove Me.
