@@ -70,11 +70,13 @@ public class Driver {
         emailSender.sendEmail("[Twitter-Bot] Test Email!");
 
         try {
-            Process p = Runtime.getRuntime().exec(
+            String emailCommand =
                     "echo 'Test passed.' | " +
-                            "mail -s '[Twitter-Bot] Test Email!' " +
-                            "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
-                            " " + System.getenv("FOSC_MAILJET_RECIPIENT"));
+                    "mail -s '[Twitter-Bot] Test Email!' " +
+                    "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
+                    " " + System.getenv("FOSC_MAILJET_RECIPIENT");
+            System.out.println("emailCommand = " + emailCommand);
+            Process p = Runtime.getRuntime().exec(emailCommand);
             p.waitFor();
             System.out.println ("exit: " + p.exitValue());
             p.destroy();
