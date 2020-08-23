@@ -5,7 +5,6 @@ import com.github.calvincodes.database.DatabaseFactory;
 import com.github.calvincodes.email.MailjetPostfixSender;
 import com.github.calvincodes.github.GitHubIssuesCollector;
 import com.github.calvincodes.github.models.SearchIssueResponse;
-import com.github.calvincodes.email.MailjetClientSender;
 import com.github.calvincodes.twitter.client.TwitterClient;
 import com.github.calvincodes.twitter.TwitterClientFactory;
 
@@ -24,9 +23,6 @@ public class Driver {
 
         // Setup Mailjet
         MailjetPostfixSender emailSender = new MailjetPostfixSender();
-
-//        // Setup Mailjet
-//        final MailjetClientSender emailSender = new MailjetClientSender();
 
         // Collect issues from GitHub
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
@@ -52,9 +48,7 @@ public class Driver {
                 twitterClient.tweetStatus(status);
                 numberOfTweets.set(numberOfTweets.get() + 1);
                 try {
-//                    int sleepSecs = random.nextInt(15) + 45;
-                    // TODO: Remove me.
-                    int sleepSecs = 0;
+                    int sleepSecs = random.nextInt(15) + 45;
                     Thread.sleep(sleepSecs * 1000);
                 } catch (InterruptedException e) {
                     System.err.println("Error while sleeping between tweets.");
@@ -69,44 +63,6 @@ public class Driver {
         if (numberOfTweets.get() == 0) {
             emailSender.sendEmail("[Twitter-Bot] Tweeted 0 issues!");
         }
-
-        // TODO: Remove me.
-        emailSender.sendEmail("[Twitter-Bot] Test Email!");
-
-        try {
-            String emailCommand =
-                    "echo 'Driver Test passed.' | " +
-                    "mail -s '[Twitter-Bot] Test Email!' " +
-                    "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
-                    " " + System.getenv("FOSC_MAILJET_RECIPIENT");
-            String[] commandArray = {"/bin/sh", "-c", emailCommand};
-            Process p = Runtime.getRuntime().exec(commandArray);
-            p.waitFor();
-            System.out.println ("Email process exit: " + p.exitValue());
-            p.destroy();
-        } catch (Exception ex) {
-            System.err.println("[com.github.calvincodes.Driver] Exception while sending email.");
-            ex.printStackTrace();
-        }
-
-//        try {
-//            ProcessBuilder processBuilder = new ProcessBuilder();
-//            String emailCommand =
-//                    "echo 'Driver Test passed.' | " +
-//                            "mail -s '[Twitter-Bot] Test Email!' " +
-//                            "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
-//                            " " + System.getenv("FOSC_MAILJET_RECIPIENT");
-//            processBuilder.command("mail", "-s", "ls /home/mkyong/");
-//            Process process = processBuilder.start();
-//            int exitVal = process.waitFor();
-//            if (exitVal == 0) {
-//                System.out.println("Success!");
-//                System.exit(0);
-//            }
-//        } catch (Exception ex) {
-//            System.err.println("[com.github.calvincodes.Driver] ProcBuilder Exception while sending email.");
-//            ex.printStackTrace();
-//        }
 
         System.out.println("[" + Instant.now() + "] Tweeted " + numberOfTweets + " issues.");
         System.out.println("Driver run completed");

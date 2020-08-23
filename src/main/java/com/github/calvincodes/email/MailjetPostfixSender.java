@@ -12,7 +12,8 @@ public class MailjetPostfixSender {
             String[] commandArray = {"/bin/sh", "-c", emailCommand};
             Process p = Runtime.getRuntime().exec(commandArray);
             p.waitFor();
-            System.out.println ("Email process exit: " + p.exitValue());
+            System.out.println (
+                    "[com.github.calvincodes.email.MailjetPostfixSender] Email process exit: " + p.exitValue());
             p.destroy();
         } catch (Exception ex) {
             System.err.println("[com.github.calvincodes.email.MailjetPostfixSender] Exception while sending email.");

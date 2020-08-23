@@ -10,6 +10,7 @@ import com.mailjet.client.resource.Emailv31;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+// TODO: Figure out why this class usage did not work.
 public class MailjetClientSender {
 
     private static volatile Boolean IS_MAILJET_CLIENT_INITIALIZED = false;
@@ -26,11 +27,6 @@ public class MailjetClientSender {
                 client = new MailjetClient(mailjetApiKey, mailjetSecretKey, new ClientOptions("v3.1"));
                 IS_MAILJET_CLIENT_INITIALIZED = true;
                 System.out.println("MailJet Client initialized");
-                // TODO: Remove me.
-                System.out.println("SENDER: " + sender);
-                System.out.println("recipient: " + recipient);
-                System.out.println("mailjetApiKey: " + mailjetApiKey);
-                System.out.println("mailjetSecretKey: " + mailjetSecretKey);
             }
         }
     }
