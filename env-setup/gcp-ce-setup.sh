@@ -32,19 +32,20 @@ git clone https://github.com/calvincodes/beginner-friendly-pr-bot.git
 
 # Pass following values to crontab itself
 ## Twitter4J setup
-# FOSC_TWITTER4J_OAUTH_CONSUMER_KEY
-# FOSC_TWITTER4J_OAUTH_CONSUMER_SECRET
-# FOSC_TWITTER4J_OAUTH_ACCESS_TOKEN
-# FOSC_TWITTER4J_OAUTH_ACCESS_TOKEN_SECRET
+#FOSC_TWITTER4J_OAUTH_CONSUMER_KEY
+#FOSC_TWITTER4J_OAUTH_CONSUMER_SECRET
+#FOSC_TWITTER4J_OAUTH_ACCESS_TOKEN
+#FOSC_TWITTER4J_OAUTH_ACCESS_TOKEN_SECRET
 ## Redis setup
-# FOSC_REDIS_HOST
-# FOSC_REDIS_PORT
-# FOSC_ENVIRONMENT
+#FOSC_REDIS_HOST
+#FOSC_REDIS_PORT
+#FOSC_ENVIRONMENT
 ## Mailjet setup
-# FOSC_MAILJET_RECIPIENT
-# FOSC_MAILJET_SENDER
-# FOSC_MAILJET_API_KEY
-# FOSC_MAILJET_SECRET_KEY
+#FOSC_MAILJET_RECIPIENT
+#FOSC_MAILJET_SENDER
+#FOSC_MAILJET_API_KEY
+#FOSC_MAILJET_SECRET_KEY
 
 # Add cron schedule
-# 0 */6 * * * java -jar ${absolute_path_to}/beginner-friendly-pr-bot/target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar
+# 0 */6 * * * java -jar ${absolute_path_to}/beginner-friendly-pr-bot/target/first-open-source-commit-bot-1.0.0-SNAPSHOT-jar-with-dependencies.jar >> log-file-path 2>&1
+

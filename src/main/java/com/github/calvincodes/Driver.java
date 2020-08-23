@@ -87,19 +87,24 @@ public class Driver {
             ex.printStackTrace();
         }
 
-        try {
-            ProcessBuilder processBuilder = new ProcessBuilder();
-            processBuilder.command("bash", "-c", "ls /home/mkyong/");
-            Process process = processBuilder.start();
-            int exitVal = process.waitFor();
-            if (exitVal == 0) {
-                System.out.println("Success!");
-                System.exit(0);
-            }
-        } catch (Exception ex) {
-            System.err.println("[com.github.calvincodes.Driver] ProcBuilder Exception while sending email.");
-            ex.printStackTrace();
-        }
+//        try {
+//            ProcessBuilder processBuilder = new ProcessBuilder();
+//            String emailCommand =
+//                    "echo 'Driver Test passed.' | " +
+//                            "mail -s '[Twitter-Bot] Test Email!' " +
+//                            "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
+//                            " " + System.getenv("FOSC_MAILJET_RECIPIENT");
+//            processBuilder.command("mail", "-s", "ls /home/mkyong/");
+//            Process process = processBuilder.start();
+//            int exitVal = process.waitFor();
+//            if (exitVal == 0) {
+//                System.out.println("Success!");
+//                System.exit(0);
+//            }
+//        } catch (Exception ex) {
+//            System.err.println("[com.github.calvincodes.Driver] ProcBuilder Exception while sending email.");
+//            ex.printStackTrace();
+//        }
 
         System.out.println("[" + Instant.now() + "] Tweeted " + numberOfTweets + " issues.");
         System.out.println("Driver run completed");
