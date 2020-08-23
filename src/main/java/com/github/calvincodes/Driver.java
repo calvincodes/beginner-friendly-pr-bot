@@ -4,6 +4,7 @@ import com.github.calvincodes.database.handler.DatabaseHandler;
 import com.github.calvincodes.database.DatabaseFactory;
 import com.github.calvincodes.github.GitHubIssuesCollector;
 import com.github.calvincodes.github.models.SearchIssueResponse;
+import com.github.calvincodes.mailjet.MailjetSender;
 import com.github.calvincodes.twitter.client.TwitterClient;
 import com.github.calvincodes.twitter.TwitterClientFactory;
 
@@ -51,6 +52,10 @@ public class Driver {
 
         // Reset DB connection
         databaseHandler.disconnect();
+
+        // TODO: Remove me after testing.
+        MailjetSender emailSender = new MailjetSender();
+        emailSender.sendEmail();
 
         System.out.println("Driver run completed");
     }

@@ -43,6 +43,12 @@
             <artifactId>lettuce</artifactId>
             <version>3.2.Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.mailjet</groupId>
+            <artifactId>mailjet-client</artifactId>
+            <version>4.5.0</version>
+        </dependency>
     </dependencies>
 
     <build>
