@@ -56,6 +56,8 @@ public class MailjetSender {
             System.out.println(response.getData());
         } catch (MailjetException | MailjetSocketTimeoutException e) {
             System.out.println("Mailjet Exception: " + e);
+            System.out.println(e.getMessage());
+            System.out.println(e.getLocalizedMessage());
             e.printStackTrace();
         }
     }
