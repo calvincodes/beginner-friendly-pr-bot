@@ -1,5 +1,6 @@
 package com.github.calvincodes.twitter.client;
 
+import com.github.calvincodes.email.MailjetPostfixSender;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -9,7 +10,9 @@ import twitter4j.conf.ConfigurationBuilder;
 public class ProductionTwitterClient implements TwitterClient {
 
     private Twitter TWITTER_CLIENT = null;
-    private volatile Boolean IS_CLIENT_INITIALIZED = false;
+    private static volatile Boolean IS_CLIENT_INITIALIZED = false;
+    private MailjetPostfixSender emailSender = new MailjetPostfixSender();
+    private final String TWEET_EXCEPTION_SUBJECT = "[Twitter-Bot] Exception while tweeting!";
 
     // TODO: Create separate config file
     public ProductionTwitterClient() {
@@ -34,6 +37,7 @@ public class ProductionTwitterClient implements TwitterClient {
             Status status = TWITTER_CLIENT.updateStatus(statusStr);
             System.out.println("[env=PROD] Successfully updated the status to [" + status.getText() + "].");
         } catch (TwitterException ex) {
+            emailSender.sendEmail(TWEET_EXCEPTION_SUBJECT);
             System.err.println("Error while tweeting status: " + statusStr);
             ex.printStackTrace();
         }
