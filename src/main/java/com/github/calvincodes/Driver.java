@@ -2,9 +2,10 @@ package com.github.calvincodes;
 
 import com.github.calvincodes.database.handler.DatabaseHandler;
 import com.github.calvincodes.database.DatabaseFactory;
+import com.github.calvincodes.email.MailjetPostfixSender;
 import com.github.calvincodes.github.GitHubIssuesCollector;
 import com.github.calvincodes.github.models.SearchIssueResponse;
-import com.github.calvincodes.mailjet.MailjetSender;
+import com.github.calvincodes.email.MailjetClientSender;
 import com.github.calvincodes.twitter.client.TwitterClient;
 import com.github.calvincodes.twitter.TwitterClientFactory;
 
@@ -22,7 +23,10 @@ public class Driver {
         Random random = new Random();
 
         // Setup Mailjet
-        final MailjetSender emailSender = new MailjetSender();
+        MailjetPostfixSender emailSender = new MailjetPostfixSender();
+
+//        // Setup Mailjet
+//        final MailjetClientSender emailSender = new MailjetClientSender();
 
         // Collect issues from GitHub
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
@@ -75,19 +79,11 @@ public class Driver {
                     "mail -s '[Twitter-Bot] Test Email!' " +
                     "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
                     " " + System.getenv("FOSC_MAILJET_RECIPIENT");
-
-//            String emailCommand = "mail -s '[Twitter-Bot] Test Email!' -aFrom:" + System.getenv("FOSC_MAILJET_SENDER") + " " + System.getenv("FOSC_MAILJET_RECIPIENT") + " <<< 'This is the message'";
-            System.out.println("emailCommand = " + emailCommand);
-
-//            String[] commandArray = {"/bin/sh", "-c", String.format("echo 'This is also test.' | mail -s '[Twitter-Bot] Test Email!' -aFrom:%s %s", System.getenv("FOSC_MAILJET_SENDER"), System.getenv("FOSC_MAILJET_RECIPIENT"))};
             String[] commandArray = {"/bin/sh", "-c", emailCommand};
-            System.out.println("commandArray = " + commandArray);
             Process p = Runtime.getRuntime().exec(commandArray);
             p.waitFor();
-            System.out.println ("exit: " + p.exitValue());
+            System.out.println ("Email process exit: " + p.exitValue());
             p.destroy();
-            // TODO: Remove Me.
-            System.err.println("[com.github.calvincodes.Driver] YAYYYY! Sent email successfully.");
         } catch (Exception ex) {
             System.err.println("[com.github.calvincodes.Driver] Exception while sending email.");
             ex.printStackTrace();

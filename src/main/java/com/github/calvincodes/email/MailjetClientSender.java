@@ -1,4 +1,4 @@
-package com.github.calvincodes.mailjet;
+package com.github.calvincodes.email;
 
 import com.mailjet.client.ClientOptions;
 import com.mailjet.client.MailjetClient;
@@ -10,14 +10,14 @@ import com.mailjet.client.resource.Emailv31;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class MailjetSender {
+public class MailjetClientSender {
 
     private static volatile Boolean IS_MAILJET_CLIENT_INITIALIZED = false;
     private static MailjetClient client = null;
     private final String recipient = System.getenv("FOSC_MAILJET_RECIPIENT");
     private final String sender = System.getenv("FOSC_MAILJET_SENDER");
 
-    public MailjetSender() {
+    public MailjetClientSender() {
         synchronized (IS_MAILJET_CLIENT_INITIALIZED) {
             if (!IS_MAILJET_CLIENT_INITIALIZED) {
                 // TODO: Create separate config file
