@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 public class MailjetSender {
 
-    private volatile Boolean IS_MAILJET_CLIENT_INITIALIZED = false;
+    private static volatile Boolean IS_MAILJET_CLIENT_INITIALIZED = false;
     private static MailjetClient client = null;
     private final String recipient = System.getenv("FOSC_MAILJET_RECIPIENT");
     private final String sender = System.getenv("FOSC_MAILJET_SENDER");

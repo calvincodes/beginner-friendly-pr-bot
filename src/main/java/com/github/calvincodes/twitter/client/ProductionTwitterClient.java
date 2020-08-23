@@ -10,7 +10,7 @@ import twitter4j.conf.ConfigurationBuilder;
 public class ProductionTwitterClient implements TwitterClient {
 
     private Twitter TWITTER_CLIENT = null;
-    private volatile Boolean IS_CLIENT_INITIALIZED = false;
+    private static volatile Boolean IS_CLIENT_INITIALIZED = false;
     private final MailjetSender emailSender = new MailjetSender();
     private final String TWEET_EXCEPTION_SUBJECT = "[Twitter-Bot] Exception while tweeting!";
 
