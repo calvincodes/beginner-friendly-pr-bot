@@ -69,6 +69,21 @@ public class Driver {
         // TODO: Remove me.
         emailSender.sendEmail("[Twitter-Bot] Test Email!");
 
+        try {
+            Process p = Runtime.getRuntime().exec(
+                    "echo 'Test passed.' | " +
+                            "mail -s '[Twitter-Bot] Test Email!' " +
+                            "-aFrom:" + System.getenv("FOSC_MAILJET_SENDER") +
+                            " " + System.getenv("FOSC_MAILJET_RECIPIENT"));
+            System.out.println ("exit: " + p.exitValue());
+            p.destroy();
+            // TODO: Remove Me.
+            System.err.println("[com.github.calvincodes.Driver] YAYYYY! Sent email successfully.");
+        } catch (Exception ex) {
+            System.err.println("[com.github.calvincodes.Driver] Exception while sending email.");
+            ex.printStackTrace();
+        }
+
         System.out.println("[" + Instant.now() + "] Tweeted " + numberOfTweets + " issues.");
         System.out.println("Driver run completed");
     }
