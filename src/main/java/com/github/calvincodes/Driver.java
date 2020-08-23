@@ -8,8 +8,10 @@ import com.github.calvincodes.mailjet.MailjetSender;
 import com.github.calvincodes.twitter.client.TwitterClient;
 import com.github.calvincodes.twitter.TwitterClientFactory;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.github.calvincodes.github.SearchableLabels.SEARCHABLE_LABELS;
 
@@ -18,6 +20,9 @@ public class Driver {
 
         List<String> labels = SEARCHABLE_LABELS;
         Random random = new Random();
+
+        // Setup Mailjet
+        final MailjetSender emailSender = new MailjetSender();
 
         // Collect issues from GitHub
         GitHubIssuesCollector gitHubIssuesCollector = new GitHubIssuesCollector();
@@ -30,6 +35,7 @@ public class Driver {
         // Tweet issues if not present in the DB
         TwitterClient twitterClient = TwitterClientFactory.getTwitterClient();
         final String HASH_TAGS = "#GitHub #OpenSource #Newbie #FirstTimersOnly #GoodFirstIssue";
+        AtomicInteger numberOfTweets = new AtomicInteger();
         searchIssueResponseList.forEach(searchIssueResponse -> searchIssueResponse.getItems().forEach(searchIssue -> {
             String key = "twitter:id:" + searchIssue.getId();
             if (databaseHandler.setKeyIfNotExist(key, "1", 2592000L)) {
@@ -40,8 +46,11 @@ public class Driver {
                 }
                 String status = statusPrefix + statusSuffix;
                 twitterClient.tweetStatus(status);
+                numberOfTweets.set(numberOfTweets.get() + 1);
                 try {
-                    int sleepSecs = random.nextInt(15) + 45;
+//                    int sleepSecs = random.nextInt(15) + 45;
+                    // TODO: Remove me.
+                    int sleepSecs = 0;
                     Thread.sleep(sleepSecs * 1000);
                 } catch (InterruptedException e) {
                     System.err.println("Error while sleeping between tweets.");
@@ -53,10 +62,14 @@ public class Driver {
         // Reset DB connection
         databaseHandler.disconnect();
 
-        // TODO: Remove me after testing.
-        MailjetSender emailSender = new MailjetSender();
-        emailSender.sendEmail();
+        if (numberOfTweets.get() == 0) {
+            emailSender.sendEmail("[Twitter-Bot] Tweeted 0 issues!");
+        }
 
+        // TODO: Remove me.
+        emailSender.sendEmail("[Twitter-Bot] Test Email!");
+
+        System.out.println("[" + Instant.now() + "] Tweeted " + numberOfTweets + " issues.");
         System.out.println("Driver run completed");
     }
 }

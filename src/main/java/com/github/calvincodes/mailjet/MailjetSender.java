@@ -13,7 +13,7 @@ import org.json.JSONObject;
 public class MailjetSender {
 
     private volatile Boolean IS_MAILJET_CLIENT_INITIALIZED = false;
-    private MailjetClient client = null;
+    private static MailjetClient client = null;
     private final String recipient = System.getenv("FOSC_MAILJET_RECIPIENT");
     private final String sender = System.getenv("FOSC_MAILJET_SENDER");
 
@@ -30,7 +30,7 @@ public class MailjetSender {
         }
     }
 
-    public void sendEmail() {
+    public void sendEmail(String subject) {
         MailjetRequest email = new MailjetRequest(Emailv31.resource)
                 .property(Emailv31.MESSAGES, new JSONArray()
                         .put(new JSONObject()
@@ -40,12 +40,12 @@ public class MailjetSender {
                                 .put(Emailv31.Message.TO, new JSONArray()
                                         .put(new JSONObject()
                                                 .put("Email", recipient)))
-                                .put(Emailv31.Message.SUBJECT, "Your email flight plan!")
+                                .put(Emailv31.Message.SUBJECT, subject)
                                 .put(Emailv31.Message.TEXTPART,
-                                        "Dear passenger, welcome to Mailjet! May the delivery force be with you!")
+                                        "Hi! SOS! They found out about me.")
                                 .put(Emailv31.Message.HTMLPART,
-                                        "<h3>Dear passenger, welcome to Mailjet!</h3>"
-                                                + "<br />May the delivery force be with you!")));
+                                        "<h3>Hi!</h3>"
+                                                + "<br />SOS! They found out about me.")));
 
 
         try {

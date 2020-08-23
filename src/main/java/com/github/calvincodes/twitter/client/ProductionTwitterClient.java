@@ -11,7 +11,8 @@ public class ProductionTwitterClient implements TwitterClient {
 
     private Twitter TWITTER_CLIENT = null;
     private volatile Boolean IS_CLIENT_INITIALIZED = false;
-    private MailjetSender emailSender = new MailjetSender();
+    private final MailjetSender emailSender = new MailjetSender();
+    private final String TWEET_EXCEPTION_SUBJECT = "[Twitter-Bot] Exception while tweeting!";
 
     // TODO: Create separate config file
     public ProductionTwitterClient() {
@@ -36,7 +37,7 @@ public class ProductionTwitterClient implements TwitterClient {
             Status status = TWITTER_CLIENT.updateStatus(statusStr);
             System.out.println("[env=PROD] Successfully updated the status to [" + status.getText() + "].");
         } catch (TwitterException ex) {
-            emailSender.sendEmail();
+            emailSender.sendEmail(TWEET_EXCEPTION_SUBJECT);
             System.err.println("Error while tweeting status: " + statusStr);
             ex.printStackTrace();
         }
