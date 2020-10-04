@@ -32,6 +32,9 @@ git clone https://github.com/calvincodes/beginner-friendly-pr-bot.git
 ## Reference: How to start redis server started with daemoize -yes
 ## https://stackoverflow.com/questions/49249229/how-to-stop-a-redis-server-that-was-started-with-daemonize-yes
 
+# Create log file and use this path in the crontab
+# touch log-file-path
+
 ## Setup crontab
 
 # Pass following values to crontab itself
