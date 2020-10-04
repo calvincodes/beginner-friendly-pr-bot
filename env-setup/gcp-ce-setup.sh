@@ -17,6 +17,7 @@ sudo apt install maven
 sudo apt-get install redis-server
 
 # Setup Mailjet as an SMTP relay
+# Sending email using PostFix sender as Java based sender example did not work.
 # https://cloud.google.com/compute/docs/tutorials/sending-mail/using-mailjet#configuring_mailjet_as_an_smtp_relay
 
 # Clone GitHub Repo
